@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>온비즈파트너스 — 회계관리 상담 창구</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #14B878;
+  --green-dark: #0E8F5D;
+  --green-soft: #EAF8F1;
+  --mint: #DFF7EC;
+  --orange: #FFB020;
+  --cream: #FFF8EA;
+  --ink: #17201B;
+  --text: #26352E;
+  --muted: #68756E;
+  --line: #E4EAE6;
+  --bg: #FBFCFA;
+  --white: #FFFFFF;
+  --shadow: 0 16px 40px rgba(23,32,27,0.08);
+  --sans: 'Noto Sans KR', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--text); background: var(--bg); word-break: keep-all; }
+a { color: inherit; text-decoration: none; }
+
+.header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  max-width: 1120px; margin: 0 auto; height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+}
+.brand { display: flex; align-items: center; gap: 0; }
+.logo-mark {
+  width: 34px; height: 34px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--green), #7BE0B5);
+  display: grid; place-items: center;
+  color: #fff; font-weight: 900; font-size: 17px;
+  box-shadow: 0 8px 18px rgba(20,184,120,0.24);
+  letter-spacing: -0.04em;
+}
+.brand-text strong { display: block; font-size: 17px; font-weight: 900; letter-spacing: -0.03em; color: var(--ink); }
+.brand-text span { display: block; font-size: 11px; color: var(--muted); margin-top: 1px; }
+.nav-menu { display: flex; gap: 26px; align-items: center; }
+.nav-menu a { font-size: 14px; color: var(--muted); font-weight: 700; transition: color 0.18s; }
+.nav-menu a:hover { color: var(--green-dark); }
+.nav-menu .nav-btn {
+  background: var(--green); color: #fff; padding: 12px 20px; border-radius: 999px;
+  font-size: 15px; font-weight: 900; letter-spacing: -0.02em;
+  box-shadow: 0 8px 18px rgba(20,184,120,0.26);
+  transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+}
+.nav-menu .nav-btn:hover { color: #fff; background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 10px 22px rgba(14,143,93,0.28); }
+
+.hero {
+  max-width: 1120px; margin: 0 auto;
+  padding: 80px 24px 60px;
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green-soft); color: var(--green-dark);
+  border: 1px solid #CBEFDE;
+  padding: 8px 14px; border-radius: 999px;
+  font-size: 13px; font-weight: 800; margin-bottom: 22px;
+}
+.badge-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; flex-shrink:0; }
+h1 {
+  font-size: 52px; line-height: 1.14; letter-spacing: -0.055em;
+  color: var(--ink); font-weight: 900; margin-bottom: 22px;
+}
+h1 em { font-style: normal; color: var(--green-dark); }
+.hero-sub {
+  font-size: 19px; line-height: 1.75; color: var(--ink);
+  font-weight: 700; margin-bottom: 10px;
+}
+.hero-copy {
+  font-size: 16px; line-height: 1.95; color: var(--muted); max-width: 570px; margin-bottom: 32px;
+}
+.hero-copy strong { color: var(--ink); font-weight: 800; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.primary {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--green); color: #fff; padding: 16px 28px; border-radius: 14px;
+  font-size: 16px; font-weight: 900;
+  box-shadow: 0 12px 26px rgba(20,184,120,0.26);
+  transition: background 0.18s, transform 0.15s;
+}
+.primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+.secondary {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #fff; color: var(--ink); padding: 15px 22px; border-radius: 14px;
+  border: 1px solid var(--line); font-size: 15px; font-weight: 800;
+  transition: border-color 0.18s;
+}
+.secondary:hover { border-color: var(--green); }
+
+.hero-panel {
+  background: #fff; border: 1px solid var(--line); border-radius: 28px;
+  padding: 26px; box-shadow: var(--shadow);
+}
+.panel-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.panel-title { font-size: 16px; font-weight: 900; color: var(--ink); }
+.panel-chip {
+  background: var(--cream); color: #A66A00;
+  border: 1px solid #FFE0A3; padding: 6px 10px;
+  border-radius: 999px; font-size: 12px; font-weight: 900;
+}
+.checklist { display: grid; gap: 10px; }
+.check {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 14px;
+}
+.check-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--mint); color: var(--green-dark);
+  display: grid; place-items: center; flex-shrink: 0; font-weight: 900; font-size: 13px;
+}
+.check strong { display: block; color: var(--ink); font-size: 14.5px; margin-bottom: 3px; }
+.check span { display: block; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.panel-note {
+  margin-top: 16px; padding: 14px 16px; border-radius: 16px;
+  background: #17201B; color: rgba(255,255,255,0.78); font-size: 13.5px; line-height: 1.75;
+}
+
+.section { padding: 80px 24px; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+.kicker { color: var(--green-dark); font-size: 12px; font-weight: 900; letter-spacing: 0.06em; margin-bottom: 10px; }
+h2 { font-size: 36px; line-height: 1.3; letter-spacing: -0.045em; color: var(--ink); font-weight: 900; margin-bottom: 14px; }
+.lead { color: var(--muted); font-size: 16.5px; line-height: 1.9; max-width: 720px; }
+
+.problem { background: #fff; }
+.problem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 36px; }
+.problem-card {
+  background: var(--bg); border: 1px solid var(--line); border-radius: 24px; padding: 26px;
+  transition: box-shadow 0.2s;
+}
+.problem-card:hover { box-shadow: var(--shadow); }
+.problem-emoji { font-size: 32px; margin-bottom: 14px; }
+.problem-card h3 { color: var(--ink); font-size: 19px; line-height: 1.45; margin-bottom: 10px; font-weight: 800; }
+.problem-card p { color: var(--muted); font-size: 15px; line-height: 1.85; }
+
+.service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+.service-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 28px;
+  box-shadow: 0 8px 24px rgba(23,32,27,0.04);
+  transition: box-shadow 0.2s;
+}
+.service-card:hover { box-shadow: var(--shadow); }
+.service-card.highlight { background: var(--green-soft); border-color: #BEEAD7; }
+.num {
+  width: 36px; height: 36px; border-radius: 13px;
+  background: var(--green); color: #fff;
+  display: grid; place-items: center; font-weight: 900; margin-bottom: 18px; font-size: 15px;
+}
+.service-card h3 { font-size: 21px; color: var(--ink); margin-bottom: 12px; font-weight: 800; }
+.service-card p { color: var(--muted); font-size: 15px; line-height: 1.9; margin-bottom: 18px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  background: #fff; border: 1px solid var(--line); color: var(--text);
+  padding: 7px 11px; border-radius: 999px; font-size: 13px; font-weight: 700;
+}
+.highlight .tag { border-color: #BEEAD7; }
+
+.process { background: #fff; }
+.steps { margin-top: 36px; display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.step {
+  border: 1px solid var(--line); border-radius: 22px; padding: 24px; background: #fff;
+  position: relative; transition: box-shadow 0.2s;
+}
+.step:hover { box-shadow: var(--shadow); }
+.step-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--green-soft); color: var(--green-dark);
+  display: grid; place-items: center; font-weight: 900; font-size: 14px;
+  margin-bottom: 14px;
+}
+.step h3 { color: var(--ink); font-size: 18px; margin-bottom: 10px; font-weight: 800; }
+.step p { color: var(--muted); font-size: 14px; line-height: 1.8; }
+
+.relation-wrap { margin-top: 36px; }
+.relation-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.relation-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: 28px;
+  box-shadow: 0 8px 24px rgba(23,32,27,0.04);
+}
+.relation-card.dark { background: var(--ink); border-color: var(--ink); }
+.relation-card small {
+  display: inline-block; padding: 5px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 900; letter-spacing: 0.05em; margin-bottom: 14px;
+}
+.relation-card:not(.dark) small { background: var(--green-soft); color: var(--green-dark); }
+.relation-card.dark small { background: rgba(123,224,181,0.15); color: #7BE0B5; }
+.relation-card h3 { font-size: 21px; margin-bottom: 10px; font-weight: 800; }
+.relation-card:not(.dark) h3 { color: var(--ink); }
+.relation-card.dark h3 { color: #fff; }
+.relation-card p { font-size: 15px; line-height: 1.9; }
+.relation-card:not(.dark) p { color: var(--muted); }
+.relation-card.dark p { color: rgba(255,255,255,0.72); }
+.relation-note {
+  background: var(--bg); border: 1px solid var(--line); border-radius: 20px;
+  padding: 20px 24px; font-size: 14px; color: var(--muted); line-height: 1.85;
+}
+.relation-note strong { color: var(--ink); font-weight: 800; }
+
+.cta { padding: 90px 24px; background: var(--ink); color: #fff; text-align: center; }
+.cta h2 { color: #fff; font-size: 38px; margin-bottom: 14px; }
+.cta-sub { color: rgba(255,255,255,0.72); font-size: 17px; line-height: 1.85; margin-bottom: 32px; max-width: 620px; margin-left: auto; margin-right: auto; }
+.cta .primary {
+  background: var(--green); color: #fff;
+  box-shadow: 0 12px 30px rgba(20,184,120,0.35);
+  font-size: 17px; padding: 18px 34px;
+}
+.cta .primary:hover { background: #10a46b; }
+
+.legal-note {
+  background: #fff; border-top: 1px solid var(--line);
+  padding: 28px 24px;
+}
+.legal-note-inner {
+  max-width: 1120px; margin: 0 auto;
+  font-size: 13px; color: var(--muted); line-height: 1.85;
+}
+.legal-note-inner strong { color: var(--text); font-weight: 700; }
+
+.footer { background: #111813; color: rgba(255,255,255,0.52); padding: 36px 24px; }
+.footer-inner {
+  max-width: 1120px; margin: 0 auto;
+  display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  align-items: flex-start;
+}
+.footer strong { color: rgba(255,255,255,0.9); display: block; margin-bottom: 8px; font-size: 14px; }
+.footer span { display: block; font-size: 12.5px; line-height: 1.85; }
+.footer-links { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.6); transition: color 0.18s; }
+.footer-links a:hover { color: #7BE0B5; }
+
+@media (max-width: 900px) {
+  .nav { padding: 0 18px; }
+  .nav-menu { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 54px 20px 44px; gap: 36px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 28px; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .service-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .relation-cards { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  h1 { font-size: 34px; }
+  h2, .cta h2 { font-size: 24px; }
+  .hero-sub { font-size: 16px; }
+  .hero-copy, .lead, .cta-sub { font-size: 15px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .primary, .secondary { width: 100%; justify-content: center; }
+  .steps { grid-template-columns: 1fr; }
+  .section { padding: 60px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="nav">
+    <a href="#top" class="brand">
+      <div class="brand-text">
+        <strong>온비즈파트너스</strong>
+        <span>회계관리 상담 창구</span>
+      </div>
+    </a>
+    <div class="nav-menu">
+      <a href="#problem">필요한 이유</a>
+      <a href="#service">업무 범위</a>
+      <a href="#process">진행 방식</a>
+      <a href="#relation">운영 구조</a>
+      <a href="#contact" class="nav-btn">서비스 문의하기</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div>
+      <div class="badge">
+        <span class="badge-dot"></span>회계관리 상담 창구
+      </div>
+      <h1>매월 회계정보가 쌓이면,<br><em>돈의 흐름이<br>보이기 시작합니다.</em></h1>
+      <p class="hero-sub">매출, 비용, 입출금, 증빙 — 매월 쌓이는 자료를 그냥 두지 마세요.</p>
+      <p class="hero-copy">
+        온비즈파트너스는 사업자의 월간 운영자료와 회계관리 업무를 상담·접수하는 창구입니다.
+        매월 쌓이는 매출·비용·입출금·증빙 자료를 월별로 관리하고,
+        <strong>회계프로그램에 반영된 자료를 기준으로 매월 손익, 비용, 입출금 흐름 등 주요 재무정보와 회계정보를 제공합니다.</strong>
+      </p>
+      <div class="hero-actions">
+        <a href="https://forms.gle/bnhZoEFGUXV4CzKm8" class="primary" target="_blank" rel="noopener">서비스 문의하기 →</a>
+        <a href="#service" class="secondary">어떻게 운영하나요?</a>
+      </div>
+    </div>
+
+    <aside class="hero-panel">
+      <div class="panel-top">
+        <div class="panel-title">월간 자료 정리 체크리스트</div>
+        <div class="panel-chip">MONTHLY</div>
+      </div>
+      <div class="checklist">
+        <div class="check">
+          <div class="check-icon">✓</div>
+          <div>
+            <strong>월별 운영정보 확인</strong>
+            <span>매출, 비용, 입출금, 증빙 등 월간 운영자료를 월별 기준으로 관리합니다.</span>
+          </div>
+        </div>
+        <div class="check">
+          <div class="check-icon">✓</div>
+          <div>
+            <strong>입출금 내역 확인</strong>
+            <span>확인이 필요한 입금·출금 항목을 구분하고 월별 흐름을 확인합니다.</span>
+          </div>
+        </div>
+        <div class="check">
+          <div class="check-icon">✓</div>
+          <div>
+            <strong>필요 증빙 확인</strong>
+            <span>회계처리에 필요한 실물증빙을 확인하고, 필요한 범위 내에서 회계처리에 반영합니다.</span>
+          </div>
+        </div>
+        <div class="check">
+          <div class="check-icon">✓</div>
+          <div>
+            <strong>재무·회계정보 제공</strong>
+            <span>회계프로그램에 반영된 자료를 기준으로 월별 손익, 비용, 입출금 흐름 등 주요 재무정보와 회계정보를 제공합니다.</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-note">
+        세무신고 대행이 아닙니다. 매월 재무정보와 회계정보를 제공하는 회계관리 상담 창구입니다.
+      </div>
+    </aside>
+  </section>
+
+  <section class="section problem" id="problem">
+    <div class="wrap">
+      <div class="kicker">WHY ONBIZ</div>
+      <h2>월별 정보가 없으면<br>회사의 현재 상태를 파악하기 어렵습니다</h2>
+      <p class="lead">
+        세무신고 시점에만 자료를 확인하면, 평소에는 우리 회사의 매출·비용·입출금 흐름을 제때 보기 어렵습니다.
+        온비즈파트너스는 매월 재무정보와 회계정보를 제공하기 위해 필요한 회계관리 범위를 상담하고,
+        실제 운영에서는 회계프로그램에 반영된 자료를 기준으로 월별 손익, 비용, 입출금 흐름 등 주요 재무정보와 회계정보를 제공합니다.
+      </p>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-emoji">🔗</div>
+          <h3>월별 현황을<br>바로 보기 어렵습니다</h3>
+          <p>매출, 비용, 입출금, 증빙 자료가 월별 기준으로 정리되지 않으면 지금 회사가 어떤 상태인지 파악하기 어렵습니다.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-emoji">🏦</div>
+          <h3>입출금 내역이<br>설명되지 않습니다</h3>
+          <p>입금과 출금은 있지만 어떤 매출, 비용, 미수·미지급과 연결되는지 확인되지 않으면 돈의 흐름을 파악하기 어렵습니다.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-emoji">📊</div>
+          <h3>세무자료가<br>운영정보로 이어지지 않습니다</h3>
+          <p>신고 목적의 자료만으로는 매월 확인해야 할 매출·비용·반복지출 등 주요 회계정보를 보기 어려운 경우가 많습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="service">
+    <div class="wrap">
+      <div class="kicker">SERVICE SCOPE</div>
+      <h2>제공되는 업무 범위</h2>
+      <p class="lead">
+        제공되는 업무는 월별 재무정보와 회계정보 제공을 중심으로 구성됩니다. 매출, 비용, 입출금, 증빙 등 주요 자료를 기준으로 확인 항목을 구분하고,
+        회계프로그램에 반영된 자료를 바탕으로 월별 손익, 비용, 입출금 흐름 등 주요 재무정보와 회계정보를 제공합니다.
+      </p>
+      <div class="service-grid">
+        <div class="service-card highlight">
+          <div class="num">1</div>
+          <h3>자료 구분 기준 세팅</h3>
+          <p>매출, 비용, 입출금, 증빙 자료가 월별로 일관되게 처리될 수 있도록 구분 기준을 설정합니다.</p>
+          <div class="tags">
+            <span class="tag">매출</span>
+            <span class="tag">비용</span>
+            <span class="tag">입출금</span>
+            <span class="tag">증빙</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="num">2</div>
+          <h3>월간 자료 및 재무·회계정보 제공</h3>
+          <p>월별 매출, 매입, 카드, 통장 내역을 확인하고, 회계프로그램에 반영된 자료를 기준으로 월별 손익, 비용, 입출금 흐름 등 주요 재무정보와 회계정보를 제공합니다.</p>
+          <div class="tags">
+            <span class="tag">월별 정보</span>
+            <span class="tag">재무·회계정보</span>
+            <span class="tag">확인 항목</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="num">3</div>
+          <h3>입출금 흐름 확인</h3>
+          <p>거래처 입금, 반복 지출, 미확인 출금 등 확인이 필요한 항목을 구분합니다.</p>
+          <div class="tags">
+            <span class="tag">입금 확인</span>
+            <span class="tag">출금 확인</span>
+            <span class="tag">반복비용</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="num">4</div>
+          <h3>필요 증빙 확인</h3>
+          <p>전체 실물증빙을 직접 전수 확인하지 않고, 회계처리에 필요한 실물증빙을 확인하여 필요한 범위 내에서 회계처리에 반영합니다.</p>
+          <div class="tags">
+            <span class="tag">실물증빙</span>
+            <span class="tag">필요 자료</span>
+            <span class="tag">회계처리</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process" id="process">
+    <div class="wrap">
+      <div class="kicker">PROCESS</div>
+      <h2>문의부터 운영까지,<br>매월 반복 가능한 기준으로 진행됩니다</h2>
+      <p class="lead">문의부터 상담, 계약, 인터뷰, 자료 구분 기준 세팅을 거쳐 이후에는 월 단위로 반복 운영합니다.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>문의·상담</h3>
+          <p>현재 자료 관리 방식, 사용 중인 운영자료, 필요한 정리 범위를 확인합니다.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>계약·인터뷰</h3>
+          <p>계약 후 사업 구조, 매출·비용 흐름, 주요 거래처와 확인 기준을 인터뷰합니다.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>자료 구분 기준 세팅</h3>
+          <p>매출, 비용, 입출금, 증빙 자료가 월별로 일관되게 처리될 수 있도록 구분 기준을 설정합니다.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>월간 운영</h3>
+          <p>월별 확인 항목을 구분하고, 회계처리에 필요한 실물증빙을 확인해 처리합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="relation">
+    <div class="wrap">
+      <div class="kicker">OPERATION MODEL</div>
+      <h2>상담부터 수행까지,<br>하나의 기준으로 진행됩니다</h2>
+      <p class="lead">
+        온비즈파트너스를 통해 편하게 문의하세요. 온비즈는 사업자 회계관리를 위한 상담·접수 창구이며,
+        실제 서비스 계약, 실무 수행, 자료 처리는 컴퍼너스의 표준 운영 프로세스에 따라 진행됩니다.
+      </p>
+      <div class="relation-wrap">
+        <div class="relation-cards">
+          <div class="relation-card">
+            <small>ONBIZ PARTNERS</small>
+            <h3>상담과 접수 창구</h3>
+            <p>사업자가 부담 없이 월별 회계관리 범위를 문의하고, 현재 자료 관리 상태를 상담받을 수 있는 창구입니다.</p>
+          </div>
+          <div class="relation-card dark">
+            <small>COMPENERS</small>
+            <h3>계약·수행·자료 처리 기준</h3>
+            <p>서비스 계약, 실무 수행, 자료 처리는 주식회사 컴퍼너스의 표준 운영 프로세스와 관리 기준에 따라 진행되어 책임 주체를 명확히 합니다.</p>
+          </div>
+        </div>
+        <div class="relation-note">
+          <strong>온비즈파트너스는 사업자 회계관리를 위한 상담·접수 창구입니다.</strong>
+          실제 서비스 계약, 실무 수행, 자료 처리는 주식회사 컴퍼너스의 표준 운영 프로세스에 따라 진행됩니다.
+          이를 통해 상담 창구와 실제 계약·수행 주체를 구분하고, 자료 처리 기준을 명확히 합니다.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <h2>매월 쌓이는 자료,<br>이번 달부터 회계정보로 관리하세요</h2>
+      <p class="cta-sub">
+        자료가 월별로 관리되면 매출·비용 흐름, 입출금 현황, 월별 재무정보와 회계정보가 더 빨리 보이기 시작합니다.<br>
+        지금 필요한 회계관리 범위부터 확인해 보세요.
+      </p>
+      <a href="https://forms.gle/bnhZoEFGUXV4CzKm8" class="primary" target="_blank" rel="noopener">서비스 문의하기 →</a>
+    </div>
+  </section>
+
+</main>
+
+<div class="legal-note">
+  <div class="legal-note-inner">
+    <strong>안내사항</strong> &nbsp;온비즈파트너스는 세무신고·세무대리 업무를 수행하지 않으며, 세무사·회계사를 대체하지 않습니다.
+    세무신고, 세무대리, 회계감사 등 법령상 자격이 필요한 업무는 고객이 선임한 세무·회계 전문가와 함께 진행되어야 합니다.
+    고객의 운영자료와 회계처리에 필요한 실물증빙은 계약 목적 범위 내에서 필요한 최소한으로만 처리됩니다.
+    월별 재무정보와 회계정보는 회계프로그램에 반영된 자료를 기준으로 제공되며, 세무신고·감사·공시 목적의 전문 검증 업무는 포함되지 않습니다.
+    실제 서비스 계약, 실무 수행, 자료 처리는 주식회사 컴퍼너스의 표준 운영 프로세스에 따라 진행됩니다.
+    법인세 신고 등 외부 전문가의 신고 업무에 필요한 경우, 계약 범위 내에서 회계프로그램 자료와 증빙 간 매칭 확인을 지원할 수 있습니다.
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <strong>온비즈파트너스</strong>
+      <span>대표자 최규영 | 사업자등록번호 404-10-33736</span>
+      <span style="margin-top:6px;">서비스 계약·수행: 주식회사 컴퍼너스 | 대표이사 정의석, 최규영 | 사업자등록번호 721-87-03463</span>
+      <div class="footer-links">
+        <a href="https://www.compeners.co.kr/" target="_blank" rel="noopener">컴퍼너스</a>
+        <a href="https://blog.naver.com/compeners" target="_blank" rel="noopener">블로그</a>
+        <a href="https://www.instagram.com/compeners/" target="_blank" rel="noopener">인스타그램</a>
+      </div>
+      <div class="footer-links" style="margin-top:14px;">
+        <a href="terms.html">이용약관</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="email-rejection.html">이메일무단수집거부</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
